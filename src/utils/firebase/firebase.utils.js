@@ -1,7 +1,15 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
+import {initializeApp} from "firebase/app";
 
-import { getAuth , createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword} from 'firebase/auth'
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithPopup,
+    GoogleAuthProvider,
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged
+} from 'firebase/auth'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -39,14 +47,10 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
 
     const userDocRef = doc(db, 'users', userAuth.uid);
 
-    console.log(userDocRef);
-
     const userSnapshot = await getDoc(userDocRef);
 
-    console.log(userSnapshot);
-
-    if(!userSnapshot.exists()) {
-        const { displayName, email} = userAuth;
+    if (!userSnapshot.exists()) {
+        const {displayName, email} = userAuth;
         const createdAt = new Date();
 
         try {
@@ -62,7 +66,7 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
     }
 }
 
-export const createAuthUserWithEmailandPassword = async (email, password) => {
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
     // this is to make sure that you get email and password
     if (!email || !password) return;
 
@@ -70,9 +74,13 @@ export const createAuthUserWithEmailandPassword = async (email, password) => {
 
 }
 
-export const signInAuthUserWithEmailandPassword = async (email, password) => {
+export const signInAuthUserWithEmailAndPassword = async (email, password) => {
     // this is to make sure that you get email and password
     if (!email || !password) return;
 
     return await signInWithEmailAndPassword(auth, email, password)
 }
+
+export const signOutUser = async() => signOut(auth);
+
+export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback)
