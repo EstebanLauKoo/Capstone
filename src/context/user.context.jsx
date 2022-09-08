@@ -15,13 +15,10 @@ export const UserProvider = ({children}) => {
     const [currentUser, setCurrentUser] = useState(null);
     const value = {currentUser, setCurrentUser};
 
-    // this is incase there is a persisting user auth logged in still
-
-
     // runs once on mount
     useEffect(() => {
         const unsubscribe = onAuthStateChangedListener((user) => {
-            if( user ) {
+            if (user) {
                 createUserDocumentFromAuth(user);
             }
             setCurrentUser(user);
