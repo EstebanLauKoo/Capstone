@@ -61,7 +61,7 @@ export const getCategoriesAndDocuments = async () => {
 
     const querySnapshot = await getDocs(q);
     const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
-        const { title, items} = docSnapshot.data();
+        const {title, items} = docSnapshot.data();
         acc[title.toLowerCase()] = items;
         return acc
     }, {})
@@ -70,6 +70,8 @@ export const getCategoriesAndDocuments = async () => {
 }
 
 export const createUserDocumentFromAuth = async (userAuth, additionalInformation = {}) => {
+
+    console.log(userAuth);
 
     if (!userAuth) return;
 
@@ -92,6 +94,8 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
             console.log('error creating the user', error.message);
         }
     }
+
+    return userDocRef;
 }
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
@@ -109,6 +113,6 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
     return await signInWithEmailAndPassword(auth, email, password)
 }
 
-export const signOutUser = async() => signOut(auth);
+export const signOutUser = async () => signOut(auth);
 
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback)
