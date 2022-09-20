@@ -8,7 +8,7 @@ import {useSelector} from "react-redux";
 const CategoriesPreview = () => {
 
     const categoriesMap = useSelector(selectCategoriesMap)
-    console.log("categories Map" + categoriesMap)
+
 
     return (
         <Fragment>
