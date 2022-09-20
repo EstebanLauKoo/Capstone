@@ -10,8 +10,9 @@ import Checkout from './routes/checkout/checkout.component';
 import { setCurrentUser } from './store/user/user.action';
 import {
     onAuthStateChangedListener,
-    createUserDocumentFromAuth,
+    createUserDocumentFromAuth, getCategoriesAndDocuments,
 } from './utils/firebase/firebase.utils';
+import {setCategoriesMap} from "./store/categories/category.action";
 
 
 const App = () => {
@@ -19,8 +20,6 @@ const App = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-
-
 
         const unsubscribe = onAuthStateChangedListener((user) => {
 

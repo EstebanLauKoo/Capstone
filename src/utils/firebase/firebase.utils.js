@@ -65,13 +65,11 @@ export const getCategoriesAndDocuments = async () => {
         acc[title.toLowerCase()] = items;
         return acc
     }, {})
-
+    console.log(categoryMap)
     return categoryMap;
 }
 
 export const createUserDocumentFromAuth = async (userAuth, additionalInformation = {}) => {
-
-    console.log(userAuth);
 
     if (!userAuth) return;
 
