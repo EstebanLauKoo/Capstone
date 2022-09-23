@@ -5,14 +5,18 @@ import Category from "../category/category.component";
 import {useDispatch} from "react-redux";
 
 import {useEffect} from "react";
+/*
+this is the thunk version replace with line 19
 import {fetchCategoriesStartAsync} from "../../store/categories/category.action";
+*/
+import {fetchCategoriesStart} from "../../store/categories/category.action";
 
 const Shop = () => {
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchCategoriesStartAsync());
+        dispatch(fetchCategoriesStart());
     }, []);
 
 
